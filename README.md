@@ -273,9 +273,11 @@ rtk_optimize:
 Run from the workspace root with an **absolute** yaml path (offset style, so a missing argument cannot silently become `""`):
 
 ```bash
-cd ~/funny_rtk_slam_ws && source install/setup.bash
+cd ~/funny_rtk_slam_ws
+source install/setup.bash
+
 ros2 run funny_lidar_slam rtk_map_optimizer \
-  /home/user/ws/src/qc_lidar_slam/config/optimization/rtk_optimize.yaml
+  /home/wheeltec/funny_rtk_slam_ws/src/qc_lidar_slam/config/optimization/rtk_optimize.yaml
 ```
 
 `YAML::BadFile ... bad file:` with an empty name means the node received an empty path — usually a failed `$(find ...)` substitution. Use a literal absolute path.
