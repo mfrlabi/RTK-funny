@@ -198,8 +198,8 @@ ros2 service list | grep -i save_map
 3-field form:
 
 ```bash
-ros2 service call /funny_lidar_slam/save_map funny_lidar_slam/srv/SaveMap \
-  "{map_path: '/home/user/maps/rtk_session_01', split_map: false, map_voxel_size: 0.0}"
+wheeltec@wheeltec:~/funny_rtk_slam_ws$ ros2 service call /funny_lidar_slam/save_map funny_lidar_slam/srv/SaveMap  "{map_path: '', split_map: false, map_voxel_size: 0.1}"
+
 ```
 
 2-field form: drop `map_voxel_size`.
