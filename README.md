@@ -209,6 +209,23 @@ ros2 service call /funny_lidar_slam/save_map funny_lidar_slam/srv/SaveMap \
 
 ---
 
+# Create the bag2 directory
+
+    mkdir -p ~/rtk_bag2
+    cd ~/rtk_bag2
+
+# Record all required topics for RTK mapping
+
+    ros2 bag record --storage mcap --max-bag-size 2000000000 \
+    --output rtk_bag2_$(date +%Y%m%d_%H%M%S) \
+    /livox/lidar \
+    /livox/imu \
+    /gnss/fix \
+    /gnss/heading \
+    /gnss/velocity \
+    /tf \
+    /tf_static
+
 ## 7. Stop mapping, then verify the artifact contract
 
 ```bash
