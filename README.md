@@ -130,6 +130,27 @@ cd ~/rtk_ws && source install/setup.bash
 ros2 launch rtk_gnss_publisher rtk_gnss.launch.py
 ```
 
+Terminal 1 — driver log:
+
+cd ~/rtk_ws && source install/setup.bash
+
+    ros2 launch rtk_gnss_publisher rtk_gnss.launch.py port:=/dev/ttyUSB1
+
+Terminal 2 — topic echo:
+
+    ros2 topic echo /gnss/fix --field status.status
+
+---------------------------------------------------
+@staticmethod
+def _fix_status(fix_type: int) -> int:
+    if fix_type == 0:
+        return NavSatStatus.STATUS_NO_FIX      # -1
+    if fix_type in (4, 5):
+        return NavSatStatus.STATUS_GBAS_FIX    # 2
+    if fix_type == 2:
+        return NavSatStatus.STATUS_SBAS_FIX    # 1
+    return NavSatStatus.STATUS_FIX             # 0
+---------------------------------------------------
 Healthy startup:
 
 ```
