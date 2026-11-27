@@ -141,15 +141,14 @@ Terminal 2 — topic echo:
     ros2 topic echo /gnss/fix --field status.status
 
 ---------------------------------------------------
-@staticmethod
-def _fix_status(fix_type: int) -> int:
-    if fix_type == 0:
-        return NavSatStatus.STATUS_NO_FIX      # -1
-    if fix_type in (4, 5):
-        return NavSatStatus.STATUS_GBAS_FIX    # 2
-    if fix_type == 2:
-        return NavSatStatus.STATUS_SBAS_FIX    # 1
-    return NavSatStatus.STATUS_FIX             # 0
+| ULink `fix_type` | Meaning | `status.status` | Suitable for Map Grading? |
+| :--- | :--- | :--- | :--- |
+| **0** | No Fix / Invalid | **-1** | ❌ No |
+| **1** | Standalone | **0** | ❌ No (m-level) |
+| **2** | DGPS / SBAS | **1** | ❌ No (dm-m level) |
+| **3** | PPP | **0** | ⚠️ Marginal |
+| **4** | **RTK Float** | **2** | ⚠️ Marginal (dm-level) |
+| **5** | **RTK Fixed** | **2** | ✅ **Yes (cm-level)** |
 ---------------------------------------------------
 Healthy startup:
 
